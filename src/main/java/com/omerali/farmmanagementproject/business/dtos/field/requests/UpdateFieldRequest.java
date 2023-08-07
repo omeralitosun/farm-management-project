@@ -11,4 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UpdateFieldRequest {
     private String name;
+    private double decare;
 }

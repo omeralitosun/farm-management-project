@@ -22,6 +22,7 @@ public class Field {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    private double decare;
     @OneToMany(mappedBy = "field")
     private List<ActionTaken> actionTakens;
 

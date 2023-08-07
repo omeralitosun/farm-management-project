@@ -14,4 +14,5 @@ import java.util.UUID;
 public class UpdateFieldResponse {
     private UUID id;
     private String name;
+    private double decare;
 }

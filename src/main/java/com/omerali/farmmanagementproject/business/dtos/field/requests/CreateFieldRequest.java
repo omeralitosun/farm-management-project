@@ -13,5 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CreateFieldRequest {
     private String name;
+    private double decare;
 }
 

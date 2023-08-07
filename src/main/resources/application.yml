@@ -1,0 +1,14 @@
+server:
+    port: 8081
+spring:
+    datasource:
+        username: root
+        password: 123456
+        url: jdbc:mysql://localhost:3306/farm-project-db?createDatabaseIfNotExist=true
+        driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+            ddl-auto: update

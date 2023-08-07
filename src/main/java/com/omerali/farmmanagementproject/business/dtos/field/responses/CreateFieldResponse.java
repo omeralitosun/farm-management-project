@@ -14,5 +14,6 @@ import java.util.UUID;
 public class CreateFieldResponse {
     private UUID id;
     private String name;
+    private double decare;
 }
 

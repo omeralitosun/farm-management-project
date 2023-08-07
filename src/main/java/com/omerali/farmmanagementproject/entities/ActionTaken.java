@@ -1,5 +1,6 @@
 package com.omerali.farmmanagementproject.entities;
 
+import com.omerali.farmmanagementproject.entities.enums.Process;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
