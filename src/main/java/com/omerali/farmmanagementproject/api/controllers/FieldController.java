@@ -40,8 +40,8 @@ public class FieldController {
     }
 
     @PutMapping("/{id}")
-    public UpdateFieldResponse update(@PathVariable UUID id, @RequestBody UpdateFieldRequest Field){
-        return service.update(id,Field);
+    public UpdateFieldResponse update(@PathVariable UUID id, @RequestBody UpdateFieldRequest request){
+        return service.update(id,request);
     }
 
     @DeleteMapping("/{id}")
@@ -50,3 +50,4 @@ public class FieldController {
         service.delete(id);
     }
 }
+

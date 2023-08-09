@@ -47,18 +47,18 @@ public class FieldManager implements FieldService {
     @Override
     public GetFieldResponse getById(UUID id) {
 
-        Field brand = repository.findById(id).orElseThrow();
-        GetFieldResponse response = mapper.map(brand,GetFieldResponse.class);
+        Field field = repository.findById(id).orElseThrow();
+        GetFieldResponse response = mapper.map(field,GetFieldResponse.class);
 
         return response;
     }
 
     @Override
     public List<GetAllFieldResponse> getAll() {
-        List<Field> brands = repository.findAll();
-        List<GetAllFieldResponse> responses = brands
+        List<Field> fields = repository.findAll();
+        List<GetAllFieldResponse> responses = fields
                 .stream()
-                .map(brand -> mapper.map(brand, GetAllFieldResponse.class))
+                .map(field -> mapper.map(field, GetAllFieldResponse.class))
                 .toList();
 
         return responses;
