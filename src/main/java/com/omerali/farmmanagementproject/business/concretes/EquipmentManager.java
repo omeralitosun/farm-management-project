@@ -30,7 +30,9 @@ public class EquipmentManager implements EquipmentService {
 
         repository.save(equipment);
         CreateEquipmentResponse response = mapper.map(equipment,CreateEquipmentResponse.class);
-
+        if (equipment.getEquipmentType() != null) {
+            response.setEquipmentType(equipment.getEquipmentType().tr);
+        }
         return response;
     }
 
@@ -41,7 +43,9 @@ public class EquipmentManager implements EquipmentService {
 
         repository.save(equipment);
         UpdateEquipmentResponse response = mapper.map(equipment,UpdateEquipmentResponse.class);
-
+        if (equipment.getEquipmentType() != null) {
+            response.setEquipmentType(equipment.getEquipmentType().tr);
+        }
         return response;
     }
 
@@ -49,7 +53,9 @@ public class EquipmentManager implements EquipmentService {
     public GetEquipmentResponse getById(UUID id) {
         Equipment equipment = repository.findById(id).orElseThrow();
         GetEquipmentResponse response = mapper.map(equipment,GetEquipmentResponse.class);
-
+        if (equipment.getEquipmentType() != null) {
+            response.setEquipmentType(equipment.getEquipmentType().tr);
+        }
         return response;
     }
 
@@ -58,7 +64,13 @@ public class EquipmentManager implements EquipmentService {
         List<Equipment> equipments = repository.findAll();
         List<GetAllEquipmentResponse> responses = equipments
                 .stream()
-                .map(equipment -> mapper.map(equipment, GetAllEquipmentResponse.class))
+                .map(equipment -> {
+                    GetAllEquipmentResponse r = mapper.map(equipment, GetAllEquipmentResponse.class);
+                    if (equipment.getEquipmentType() != null) {
+                        r.setEquipmentType(equipment.getEquipmentType().tr);
+                    }
+                    return r;
+                })
                 .toList();
 
         return responses;

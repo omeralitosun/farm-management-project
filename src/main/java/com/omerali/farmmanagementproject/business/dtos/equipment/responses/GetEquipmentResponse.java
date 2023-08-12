@@ -15,5 +15,5 @@ import java.util.UUID;
 public class GetEquipmentResponse {
     private UUID id;
     private String name;
-    private EquipmentType equipmentType;
+    private String equipmentType;
 }
