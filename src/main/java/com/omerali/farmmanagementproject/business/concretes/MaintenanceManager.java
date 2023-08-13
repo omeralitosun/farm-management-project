@@ -1,6 +1,7 @@
 package com.omerali.farmmanagementproject.business.concretes;
 
 import com.omerali.farmmanagementproject.business.abstracts.MaintenanceService;
+import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetAllActionTakenResponse;
 import com.omerali.farmmanagementproject.business.dtos.maintenance.requests.CreateMaintenanceRequest;
 import com.omerali.farmmanagementproject.business.dtos.maintenance.requests.UpdateMaintenanceRequest;
 import com.omerali.farmmanagementproject.business.dtos.maintenance.responses.CreateMaintenanceResponse;
@@ -29,6 +30,9 @@ public class MaintenanceManager implements MaintenanceService {
         repository.save(maintenance);
         CreateMaintenanceResponse response = mapper.map(maintenance,CreateMaintenanceResponse.class);
 
+        if (maintenance.getMaintenanceType() != null) {
+            response.setMaintenanceType(maintenance.getMaintenanceType().tr);
+        }
         return response;
     }
 
@@ -40,6 +44,9 @@ public class MaintenanceManager implements MaintenanceService {
         repository.save(maintenance);
         UpdateMaintenanceResponse response = mapper.map(maintenance,UpdateMaintenanceResponse.class);
 
+        if (maintenance.getMaintenanceType() != null) {
+            response.setMaintenanceType(maintenance.getMaintenanceType().tr);
+        }
         return response;
     }
 
@@ -48,6 +55,9 @@ public class MaintenanceManager implements MaintenanceService {
         Maintenance maintenance = repository.findById(id).orElseThrow();
         GetMaintenanceResponse response = mapper.map(maintenance,GetMaintenanceResponse.class);
 
+        if (maintenance.getMaintenanceType() != null) {
+            response.setMaintenanceType(maintenance.getMaintenanceType().tr);
+        }
         return response;
     }
 
@@ -56,7 +66,13 @@ public class MaintenanceManager implements MaintenanceService {
         List<Maintenance> maintenances = repository.findAll();
         List<GetAllMaintenanceResponse> responses = maintenances
                 .stream()
-                .map(maintenance -> mapper.map(maintenance, GetAllMaintenanceResponse.class))
+                .map(maintenance -> {
+                    GetAllMaintenanceResponse r = mapper.map(maintenance, GetAllMaintenanceResponse.class);
+                    if (maintenance.getMaintenanceType() != null) {
+                        r.setMaintenanceType(maintenance.getMaintenanceType().tr);
+                    }
+                    return r;
+                })
                 .toList();
 
         return responses;

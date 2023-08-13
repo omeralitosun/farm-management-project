@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class GetMaintenanceResponse {
     private UUID id;
-    private MaintenanceType maintenanceType;
+    private String maintenanceType;
     private double cost;
     private String comment;
     private LocalDateTime date;

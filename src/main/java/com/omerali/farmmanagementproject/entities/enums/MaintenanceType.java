@@ -1,7 +1,13 @@
 package com.omerali.farmmanagementproject.entities.enums;
 
 public enum MaintenanceType {
-    MAINTENANCE,
-    PARTS_REPLACEMENT,
-    OTHER
+    MAINTENANCE("Bakım"),
+    PARTS_REPLACEMENT("Parça Değişimi"),
+    OTHER("Diğer");
+
+    public final String tr;
+
+    private MaintenanceType(String tr) {
+        this.tr = tr;
+    }
 }

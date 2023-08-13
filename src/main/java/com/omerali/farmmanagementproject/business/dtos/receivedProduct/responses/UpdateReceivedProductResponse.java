@@ -17,7 +17,7 @@ public class UpdateReceivedProductResponse {
     private UUID id;
     private String name;
     private double amount;
-    private Unit unit;
+    private String unit;
     private double unitPrice;
     private double totalPrice;
     private String comment;

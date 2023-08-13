@@ -1,6 +1,7 @@
 package com.omerali.farmmanagementproject.business.concretes;
 
 import com.omerali.farmmanagementproject.business.abstracts.SelledProductService;
+import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses.GetAllReceivedProductResponse;
 import com.omerali.farmmanagementproject.business.dtos.selledProduct.requests.CreateSelledProductRequest;
 import com.omerali.farmmanagementproject.business.dtos.selledProduct.requests.UpdateSelledProductRequest;
 import com.omerali.farmmanagementproject.business.dtos.selledProduct.responses.CreateSelledProductResponse;
@@ -30,6 +31,9 @@ public class SelledProductManager implements SelledProductService {
         repository.save(selledProduct);
         CreateSelledProductResponse response = mapper.map(selledProduct, CreateSelledProductResponse.class);
 
+        if (selledProduct.getUnit() != null) {
+            response.setUnit(selledProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -41,6 +45,9 @@ public class SelledProductManager implements SelledProductService {
         repository.save(selledProduct);
         UpdateSelledProductResponse response = mapper.map(selledProduct, UpdateSelledProductResponse.class);
 
+        if (selledProduct.getUnit() != null) {
+            response.setUnit(selledProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -50,6 +57,9 @@ public class SelledProductManager implements SelledProductService {
         SelledProduct selledProduct = repository.findById(id).orElseThrow();
         GetSelledProductResponse response = mapper.map(selledProduct,GetSelledProductResponse.class);
 
+        if (selledProduct.getUnit() != null) {
+            response.setUnit(selledProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -58,7 +68,13 @@ public class SelledProductManager implements SelledProductService {
         List<SelledProduct> selledProducts = repository.findAll();
         List<GetAllSelledProductResponse> responses = selledProducts
                 .stream()
-                .map(selledProduct -> mapper.map(selledProduct, GetAllSelledProductResponse.class))
+                .map(selledProduct -> {
+                    GetAllSelledProductResponse r = mapper.map(selledProduct, GetAllSelledProductResponse.class);
+                    if (selledProduct.getUnit() != null) {
+                        r.setUnit(selledProduct.getUnit().tr);
+                    }
+                    return r;
+                })
                 .toList();
 
         return responses;

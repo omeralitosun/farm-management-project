@@ -28,7 +28,9 @@ public class ActionTakenManager implements ActionTakenService {
 
         repository.save(actionTaken);
         CreateActionTakenResponse response = mapper.map(actionTaken,CreateActionTakenResponse.class);
-
+        if (actionTaken.getProcess() != null) {
+            response.setProcess(actionTaken.getProcess().tr);
+        }
         return response;
     }
 
@@ -39,7 +41,9 @@ public class ActionTakenManager implements ActionTakenService {
 
         repository.save(actionTaken);
         UpdateActionTakenResponse response = mapper.map(actionTaken,UpdateActionTakenResponse.class);
-
+        if (actionTaken.getProcess() != null) {
+            response.setProcess(actionTaken.getProcess().tr);
+        }
         return response;
     }
 
@@ -47,7 +51,9 @@ public class ActionTakenManager implements ActionTakenService {
     public GetActionTakenResponse getById(UUID id) {
         ActionTaken actionTaken = repository.findById(id).orElseThrow();
         GetActionTakenResponse response = mapper.map(actionTaken,GetActionTakenResponse.class);
-
+        if (actionTaken.getProcess() != null) {
+            response.setProcess(actionTaken.getProcess().tr);
+        }
         return response;
     }
 
@@ -56,7 +62,13 @@ public class ActionTakenManager implements ActionTakenService {
         List<ActionTaken> actionTakens = repository.findAll();
         List<GetAllActionTakenResponse> responses = actionTakens
                 .stream()
-                .map(actionTaken -> mapper.map(actionTaken, GetAllActionTakenResponse.class))
+                .map(actionTaken -> {
+                    GetAllActionTakenResponse r = mapper.map(actionTaken, GetAllActionTakenResponse.class);
+                    if (actionTaken.getProcess() != null) {
+                        r.setProcess(actionTaken.getProcess().tr);
+                    }
+                    return r;
+                })
                 .toList();
 
         return responses;

@@ -1,6 +1,7 @@
 package com.omerali.farmmanagementproject.business.concretes;
 
 import com.omerali.farmmanagementproject.business.abstracts.ReceivedProductService;
+import com.omerali.farmmanagementproject.business.dtos.maintenance.responses.GetAllMaintenanceResponse;
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.requests.CreateReceivedProductRequest;
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.requests.UpdateReceivedProductRequest;
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses.CreateReceivedProductResponse;
@@ -30,6 +31,9 @@ public class ReceivedProductManager implements ReceivedProductService {
         repository.save(receivedProduct);
         CreateReceivedProductResponse response = mapper.map(receivedProduct, CreateReceivedProductResponse.class);
 
+        if (receivedProduct.getUnit() != null) {
+            response.setUnit(receivedProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -41,6 +45,9 @@ public class ReceivedProductManager implements ReceivedProductService {
         repository.save(receivedProduct);
         UpdateReceivedProductResponse response = mapper.map(receivedProduct, UpdateReceivedProductResponse.class);
 
+        if (receivedProduct.getUnit() != null) {
+            response.setUnit(receivedProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -50,6 +57,9 @@ public class ReceivedProductManager implements ReceivedProductService {
         ReceivedProduct receivedProduct = repository.findById(id).orElseThrow();
         GetReceivedProductResponse response = mapper.map(receivedProduct,GetReceivedProductResponse.class);
 
+        if (receivedProduct.getUnit() != null) {
+            response.setUnit(receivedProduct.getUnit().tr);
+        }
         return response;
     }
 
@@ -58,7 +68,13 @@ public class ReceivedProductManager implements ReceivedProductService {
         List<ReceivedProduct> receivedProducts = repository.findAll();
         List<GetAllReceivedProductResponse> responses = receivedProducts
                 .stream()
-                .map(receivedProduct -> mapper.map(receivedProduct, GetAllReceivedProductResponse.class))
+                .map(receivedProduct -> {
+                    GetAllReceivedProductResponse r = mapper.map(receivedProduct, GetAllReceivedProductResponse.class);
+                    if (receivedProduct.getUnit() != null) {
+                        r.setUnit(receivedProduct.getUnit().tr);
+                    }
+                    return r;
+                })
                 .toList();
 
         return responses;

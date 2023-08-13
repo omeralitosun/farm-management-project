@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdateActionTakenResponse {
     private UUID id;
-    private Process process;
+    private String process;
     private double cost;
     private String comment;
     private LocalDateTime date;
