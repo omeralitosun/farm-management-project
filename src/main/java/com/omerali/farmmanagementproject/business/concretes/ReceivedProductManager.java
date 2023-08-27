@@ -28,6 +28,7 @@ public class ReceivedProductManager implements ReceivedProductService {
 
         ReceivedProduct receivedProduct = mapper.map(request,ReceivedProduct.class);
         receivedProduct.setId(null);
+        receivedProduct.setTotalPrice(receivedProduct.getUnitPrice()* receivedProduct.getAmount());
         repository.save(receivedProduct);
         CreateReceivedProductResponse response = mapper.map(receivedProduct, CreateReceivedProductResponse.class);
 
@@ -42,6 +43,7 @@ public class ReceivedProductManager implements ReceivedProductService {
 
         ReceivedProduct receivedProduct = mapper.map(request,ReceivedProduct.class);
         receivedProduct.setId(id);
+        receivedProduct.setTotalPrice(receivedProduct.getUnitPrice()* receivedProduct.getAmount());
         repository.save(receivedProduct);
         UpdateReceivedProductResponse response = mapper.map(receivedProduct, UpdateReceivedProductResponse.class);
 

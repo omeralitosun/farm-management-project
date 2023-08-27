@@ -3,10 +3,7 @@ package com.omerali.farmmanagementproject.business.concretes;
 import com.omerali.farmmanagementproject.business.abstracts.ActionTakenService;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.CreateActionTakenRequest;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.UpdateActionTakenRequest;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.CreateActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetAllActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.UpdateActionTakenResponse;
+import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.*;
 import com.omerali.farmmanagementproject.entities.ActionTaken;
 import com.omerali.farmmanagementproject.repository.ActionTakenRepository;
 import lombok.AllArgsConstructor;
@@ -77,5 +74,22 @@ public class ActionTakenManager implements ActionTakenService {
     @Override
     public void delete(UUID id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<GetAllActionTakenByFieldResponse> getAllByField(UUID fieldId) {
+        List<ActionTaken> actionTakens = repository.findAllByFieldId(fieldId);
+        List<GetAllActionTakenByFieldResponse> responses = actionTakens
+                .stream()
+                .map(actionTaken -> {
+                    GetAllActionTakenByFieldResponse r = mapper.map(actionTaken, GetAllActionTakenByFieldResponse.class);
+                    if (actionTaken.getProcess() != null) {
+                        r.setProcess(actionTaken.getProcess().tr);
+                    }
+                    return r;
+                })
+                .toList();
+
+        return responses;
     }
 }

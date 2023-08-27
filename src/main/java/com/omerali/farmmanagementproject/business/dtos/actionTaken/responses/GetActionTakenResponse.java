@@ -1,6 +1,6 @@
 package com.omerali.farmmanagementproject.business.dtos.actionTaken.responses;
 
-import com.omerali.farmmanagementproject.entities.enums.Process;
+import com.omerali.farmmanagementproject.common.dto.EntitieIdAndName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +15,10 @@ import java.util.UUID;
 @AllArgsConstructor
 public class GetActionTakenResponse {
     private UUID id;
+    private EntitieIdAndName field;
     private String process;
     private double cost;
     private String comment;
     private LocalDateTime date;
-    private UUID fieldId;
+
 }

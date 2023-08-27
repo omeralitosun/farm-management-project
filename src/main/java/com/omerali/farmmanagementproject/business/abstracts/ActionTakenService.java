@@ -2,10 +2,7 @@ package com.omerali.farmmanagementproject.business.abstracts;
 
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.CreateActionTakenRequest;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.UpdateActionTakenRequest;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.CreateActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetAllActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.UpdateActionTakenResponse;
+import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.*;
 
 
 import java.util.List;
@@ -21,4 +18,6 @@ public interface ActionTakenService {
     List<GetAllActionTakenResponse> getAll();
 
     void delete(UUID id);
+
+    List<GetAllActionTakenByFieldResponse> getAllByField(UUID fieldId);
 }

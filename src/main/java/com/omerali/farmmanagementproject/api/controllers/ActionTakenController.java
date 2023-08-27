@@ -3,10 +3,7 @@ package com.omerali.farmmanagementproject.api.controllers;
 import com.omerali.farmmanagementproject.business.abstracts.ActionTakenService;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.CreateActionTakenRequest;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.UpdateActionTakenRequest;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.CreateActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetAllActionTakenResponse;
-import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.UpdateActionTakenResponse;
+import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +22,11 @@ public class ActionTakenController {
     @GetMapping
     public List<GetAllActionTakenResponse> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping("/byField")
+    public List<GetAllActionTakenByFieldResponse> getAll(@RequestParam(required = false) UUID fieldId) {
+        return service.getAllByField(fieldId);
     }
 
     @GetMapping("/{id}")

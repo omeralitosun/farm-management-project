@@ -18,7 +18,6 @@ public class CreateReceivedProductRequest {
     private double amount;
     private Unit unit;
     private double unitPrice;
-    private double totalPrice;
     private String comment;
     private LocalDateTime date;
 }

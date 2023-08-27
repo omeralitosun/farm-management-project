@@ -1,4 +1,4 @@
-package com.omerali.farmmanagementproject.business.dtos.maintenance.responses;
+package com.omerali.farmmanagementproject.business.dtos.harvest.responses;
 
 import com.omerali.farmmanagementproject.common.dto.EntitieIdAndName;
 import lombok.AllArgsConstructor;
@@ -13,11 +13,13 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetMaintenanceResponse {
+public class UpdateHarvestResponse {
     private UUID id;
-    private EntitieIdAndName equipment;
-    private String maintenanceType;
-    private double cost;
+    private EntitieIdAndName field;
+    private String name;
+    private double amount;
+    private double unitPrice;
+    private double totalPrice;
     private String comment;
     private LocalDateTime date;
 }

@@ -13,11 +13,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAllActionTakenResponse {
-    private UUID id;
-    private EntitieIdAndName field;
-    private String process;
-    private double cost;
-    private String comment;
-    private LocalDateTime date;
+public class GetAllActionTakenByFieldResponse {
+        private UUID id;
+        private String process;
+        private double cost;
+        private String comment;
+        private LocalDateTime date;
+
 }

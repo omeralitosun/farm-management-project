@@ -25,7 +25,8 @@ public class Field {
     private double decare;
     @OneToMany(mappedBy = "field")
     private List<ActionTaken> actionTakens;
-
+    @OneToMany(mappedBy = "field")
+    private List<Harvest> harvests;
 }
 
 

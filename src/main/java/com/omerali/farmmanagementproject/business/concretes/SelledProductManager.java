@@ -28,6 +28,7 @@ public class SelledProductManager implements SelledProductService {
 
         SelledProduct selledProduct = mapper.map(request,SelledProduct.class);
         selledProduct.setId(null);
+        selledProduct.setTotalPrice(selledProduct.getUnitPrice()* selledProduct.getAmount());
         repository.save(selledProduct);
         CreateSelledProductResponse response = mapper.map(selledProduct, CreateSelledProductResponse.class);
 
@@ -42,6 +43,7 @@ public class SelledProductManager implements SelledProductService {
 
         SelledProduct selledProduct = mapper.map(request,SelledProduct.class);
         selledProduct.setId(id);
+        selledProduct.setTotalPrice(selledProduct.getUnitPrice()* selledProduct.getAmount());
         repository.save(selledProduct);
         UpdateSelledProductResponse response = mapper.map(selledProduct, UpdateSelledProductResponse.class);
 
