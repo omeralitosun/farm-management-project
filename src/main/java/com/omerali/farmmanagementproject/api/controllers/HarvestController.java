@@ -2,6 +2,7 @@ package com.omerali.farmmanagementproject.api.controllers;
 
 import com.omerali.farmmanagementproject.business.abstracts.HarvestService;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestRequest;
+import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestsRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.UpdateHarvestRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.responses.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,12 @@ public class HarvestController {
     @ResponseStatus(HttpStatus.CREATED)
     public CreateHarvestResponse add(@RequestBody CreateHarvestRequest request) {
         return service.create(request);
+    }
+
+    @PostMapping("/bulkCreate")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addHarvests(@RequestBody List<CreateHarvestsRequest> request) {
+        service.createHarvests(request);
     }
 
     @PutMapping("/{id}")

@@ -2,6 +2,7 @@ package com.omerali.farmmanagementproject.business.concretes;
 
 import com.omerali.farmmanagementproject.business.abstracts.HarvestService;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestRequest;
+import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestsRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.UpdateHarvestRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.responses.*;
 import com.omerali.farmmanagementproject.entities.Harvest;
@@ -26,6 +27,19 @@ public class HarvestManager implements HarvestService {
         repository.save(harvest);
         CreateHarvestResponse response = mapper.map(harvest, CreateHarvestResponse.class);
         return response;
+    }
+
+    @Override
+    public void createHarvests(List<CreateHarvestsRequest> request) {
+        List<Harvest> harvests = request
+                .stream()
+                .map(harvest -> {
+                    Harvest r = mapper.map(harvest, Harvest.class);
+                    r.setTotalPrice(r.getUnitPrice()*r.getAmount());
+                    return r;
+                })
+                .toList();
+        repository.saveAll(harvests);
     }
 
     @Override

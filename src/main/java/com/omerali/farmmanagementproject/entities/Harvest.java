@@ -21,4 +21,8 @@ public class Harvest extends Product {
     @ManyToOne
     @JoinColumn(name="field_id")
     private Field field;
+
+    @ManyToOne
+    @JoinColumn(name="season_id")
+    private Season season;
 }
