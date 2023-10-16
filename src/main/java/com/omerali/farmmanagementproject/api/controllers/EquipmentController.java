@@ -7,6 +7,7 @@ import com.omerali.farmmanagementproject.business.dtos.equipment.responses.Creat
 import com.omerali.farmmanagementproject.business.dtos.equipment.responses.GetAllEquipmentResponse;
 import com.omerali.farmmanagementproject.business.dtos.equipment.responses.GetEquipmentResponse;
 import com.omerali.farmmanagementproject.business.dtos.equipment.responses.UpdateEquipmentResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,12 @@ public class EquipmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateEquipmentResponse add(@RequestBody CreateEquipmentRequest request) {
+    public CreateEquipmentResponse add(@Valid @RequestBody CreateEquipmentRequest request) {
         return service.create(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateEquipmentResponse update(@PathVariable UUID id, @RequestBody UpdateEquipmentRequest request) {
+    public UpdateEquipmentResponse update(@PathVariable UUID id,@Valid  @RequestBody UpdateEquipmentRequest request) {
         return service.update(id, request);
     }
 

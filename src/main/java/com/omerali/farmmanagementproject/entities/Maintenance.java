@@ -20,6 +20,7 @@ public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Enumerated(EnumType.STRING)
     private MaintenanceType maintenanceType;
     private double cost;
     private String comment;

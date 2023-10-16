@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface HarvestRepository extends JpaRepository<Harvest,UUID> {
     List<Harvest> findAllByFieldId(UUID fieldId);
+    List<Harvest> findAllByFieldIdAndSeasonId(UUID fieldId, UUID seasonId);
 }

@@ -19,11 +19,12 @@ import java.util.UUID;
 public class HarvestManager implements HarvestService {
     private final HarvestRepository repository;
     private final ModelMapper mapper;
+
     @Override
     public CreateHarvestResponse create(CreateHarvestRequest request) {
-        Harvest harvest = mapper.map(request,Harvest.class);
+        Harvest harvest = mapper.map(request, Harvest.class);
         harvest.setId(null);
-        harvest.setTotalPrice(harvest.getUnitPrice()*harvest.getAmount());
+        harvest.setTotalPrice(harvest.getUnitPrice() * harvest.getAmount());
         repository.save(harvest);
         CreateHarvestResponse response = mapper.map(harvest, CreateHarvestResponse.class);
         return response;
@@ -35,7 +36,7 @@ public class HarvestManager implements HarvestService {
                 .stream()
                 .map(harvest -> {
                     Harvest r = mapper.map(harvest, Harvest.class);
-                    r.setTotalPrice(r.getUnitPrice()*r.getAmount());
+                    r.setTotalPrice(r.getUnitPrice() * r.getAmount());
                     return r;
                 })
                 .toList();
@@ -44,18 +45,18 @@ public class HarvestManager implements HarvestService {
 
     @Override
     public UpdateHarvestResponse update(UUID id, UpdateHarvestRequest request) {
-        Harvest harvest = mapper.map(request,Harvest.class);
+        Harvest harvest = mapper.map(request, Harvest.class);
         harvest.setId(id);
-        harvest.setTotalPrice(harvest.getUnitPrice()*harvest.getAmount());
+        harvest.setTotalPrice(harvest.getUnitPrice() * harvest.getAmount());
         repository.save(harvest);
-        UpdateHarvestResponse response = mapper.map(harvest,UpdateHarvestResponse.class);
+        UpdateHarvestResponse response = mapper.map(harvest, UpdateHarvestResponse.class);
         return response;
     }
 
     @Override
     public GetHarvestResponse getById(UUID id) {
         Harvest harvest = repository.findById(id).orElseThrow();
-        GetHarvestResponse response = mapper.map(harvest,GetHarvestResponse.class);
+        GetHarvestResponse response = mapper.map(harvest, GetHarvestResponse.class);
 
         return response;
     }
@@ -63,15 +64,13 @@ public class HarvestManager implements HarvestService {
     @Override
     public List<GetAllHarvestResponse> getAll() {
         List<Harvest> harvests = repository.findAll();
-        List<GetAllHarvestResponse> responses = harvests
+        return harvests
                 .stream()
                 .map(harvest -> {
                     GetAllHarvestResponse r = mapper.map(harvest, GetAllHarvestResponse.class);
                     return r;
                 })
                 .toList();
-
-        return responses;
     }
 
     @Override
@@ -82,14 +81,23 @@ public class HarvestManager implements HarvestService {
     @Override
     public List<GetAllHarvestByFieldResponse> getAllByField(UUID fieldId) {
         List<Harvest> harvests = repository.findAllByFieldId(fieldId);
-        List<GetAllHarvestByFieldResponse> responses = harvests
+        return harvests
                 .stream()
-                .map(harvest -> {
-                    GetAllHarvestByFieldResponse r = mapper.map(harvest, GetAllHarvestByFieldResponse.class);
-                    return r;
-                })
+                .map(harvest ->
+                        mapper.map(harvest, GetAllHarvestByFieldResponse.class)
+                )
                 .toList();
 
-        return responses;
+    }
+
+    @Override
+    public List<GetAllHarvestByFieldAndSeasonResponse> getAllByFieldAndSeason(UUID fieldId, UUID seasonId) {
+        List<Harvest> harvests = repository.findAllByFieldIdAndSeasonId(fieldId,seasonId);
+        return harvests
+                .stream()
+                .map(harvest ->
+                        mapper.map(harvest, GetAllHarvestByFieldAndSeasonResponse.class)
+                )
+                .toList();
     }
 }

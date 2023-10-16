@@ -1,10 +1,12 @@
 package com.omerali.farmmanagementproject.api.controllers;
 
 import com.omerali.farmmanagementproject.business.abstracts.HarvestService;
+import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.GetAllActionTakenByFieldAndSeasonResponse;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.CreateHarvestsRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.requests.UpdateHarvestRequest;
 import com.omerali.farmmanagementproject.business.dtos.harvest.responses.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,10 @@ public class HarvestController {
     public List<GetAllHarvestByFieldResponse> getAll(@RequestParam(required = false) UUID fieldId) {
         return service.getAllByField(fieldId);
     }
+    @GetMapping("/byFieldandSeason")
+    public List<GetAllHarvestByFieldAndSeasonResponse> getAll(@RequestParam(required = false) UUID fieldId, @RequestParam(required = false) UUID seasonId) {
+        return service.getAllByFieldAndSeason(fieldId,seasonId);
+    }
     @GetMapping("/{id}")
     public GetHarvestResponse getById(@PathVariable UUID id) {
         return service.getById(id);
@@ -36,7 +42,7 @@ public class HarvestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateHarvestResponse add(@RequestBody CreateHarvestRequest request) {
+    public CreateHarvestResponse add(@Valid @RequestBody CreateHarvestRequest request) {
         return service.create(request);
     }
 
@@ -47,7 +53,7 @@ public class HarvestController {
     }
 
     @PutMapping("/{id}")
-    public UpdateHarvestResponse update(@PathVariable UUID id, @RequestBody UpdateHarvestRequest request) {
+    public UpdateHarvestResponse update(@PathVariable UUID id,@Valid  @RequestBody UpdateHarvestRequest request) {
         return service.update(id, request);
     }
 

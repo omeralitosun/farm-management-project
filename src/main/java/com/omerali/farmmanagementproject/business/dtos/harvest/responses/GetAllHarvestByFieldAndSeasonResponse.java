@@ -1,7 +1,5 @@
-package com.omerali.farmmanagementproject.entities.base;
+package com.omerali.farmmanagementproject.business.dtos.harvest.responses;
 
-import com.omerali.farmmanagementproject.entities.enums.Unit;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,18 +12,12 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class GetAllHarvestByFieldAndSeasonResponse {
     private UUID id;
     private String name;
     private double amount;
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
     private double unitPrice;
     private double totalPrice;
     private String comment;
     private LocalDateTime date;
-
 }

@@ -21,6 +21,7 @@ public class Equipment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private EquipmentType equipmentType;
     @OneToMany(mappedBy = "equipment")
     public List<Maintenance> maintenances;

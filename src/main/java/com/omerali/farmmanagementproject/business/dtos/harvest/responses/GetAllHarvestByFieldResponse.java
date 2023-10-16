@@ -21,3 +21,4 @@ public class GetAllHarvestByFieldResponse {
     private String comment;
     private LocalDateTime date;
 }
+

@@ -6,6 +6,7 @@ import com.omerali.farmmanagementproject.business.dtos.season.requests.CreateSea
 import com.omerali.farmmanagementproject.business.dtos.season.responses.CreateSeasonResponse;
 import com.omerali.farmmanagementproject.business.dtos.season.responses.GetAllSeasonResponse;
 import com.omerali.farmmanagementproject.business.dtos.season.responses.GetSeasonResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class SeasonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateSeasonResponse add(@RequestBody CreateSeasonRequest request){
+    public CreateSeasonResponse add(@Valid @RequestBody CreateSeasonRequest request){
         return service.create(request);
     }
 

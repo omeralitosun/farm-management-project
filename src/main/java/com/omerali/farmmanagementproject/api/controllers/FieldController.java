@@ -7,6 +7,7 @@ import com.omerali.farmmanagementproject.business.dtos.field.responses.CreateFie
 import com.omerali.farmmanagementproject.business.dtos.field.responses.GetAllFieldResponse;
 import com.omerali.farmmanagementproject.business.dtos.field.responses.GetFieldResponse;
 import com.omerali.farmmanagementproject.business.dtos.field.responses.UpdateFieldResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -35,12 +36,12 @@ public class FieldController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateFieldResponse add(@RequestBody CreateFieldRequest request){
+    public CreateFieldResponse add(@Valid @RequestBody CreateFieldRequest request){
         return service.create(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateFieldResponse update(@PathVariable UUID id, @RequestBody UpdateFieldRequest request){
+    public UpdateFieldResponse update(@PathVariable UUID id,@Valid @RequestBody UpdateFieldRequest request){
         return service.update(id,request);
     }
 

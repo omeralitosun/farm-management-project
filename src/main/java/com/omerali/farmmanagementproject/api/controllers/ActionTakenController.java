@@ -4,6 +4,7 @@ import com.omerali.farmmanagementproject.business.abstracts.ActionTakenService;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.CreateActionTakenRequest;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.requests.UpdateActionTakenRequest;
 import com.omerali.farmmanagementproject.business.dtos.actionTaken.responses.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,10 @@ public class ActionTakenController {
     public List<GetAllActionTakenByFieldResponse> getAll(@RequestParam(required = false) UUID fieldId) {
         return service.getAllByField(fieldId);
     }
+    @GetMapping("/byFieldandSeason")
+    public List<GetAllActionTakenByFieldAndSeasonResponse> getAll(@RequestParam(required = false) UUID fieldId,@RequestParam(required = false) UUID seasonId) {
+        return service.getAllByFieldAndSeason(fieldId,seasonId);
+    }
 
     @GetMapping("/{id}")
     public GetActionTakenResponse getById(@PathVariable UUID id) {
@@ -36,12 +41,12 @@ public class ActionTakenController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateActionTakenResponse add(@RequestBody CreateActionTakenRequest request) {
+    public CreateActionTakenResponse add(@Valid @RequestBody CreateActionTakenRequest request) {
         return service.create(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateActionTakenResponse update(@PathVariable UUID id, @RequestBody UpdateActionTakenRequest request) {
+    public UpdateActionTakenResponse update(@PathVariable UUID id,@Valid  @RequestBody UpdateActionTakenRequest request) {
         return service.update(id, request);
     }
 

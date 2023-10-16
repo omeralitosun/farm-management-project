@@ -23,4 +23,5 @@ public interface HarvestService {
     void delete(UUID id);
 
     List<GetAllHarvestByFieldResponse> getAllByField(UUID fieldId);
+    List<GetAllHarvestByFieldAndSeasonResponse> getAllByFieldAndSeason(UUID fieldId,UUID seasonId);
 }

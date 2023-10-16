@@ -20,4 +20,5 @@ public interface ActionTakenService {
     void delete(UUID id);
 
     List<GetAllActionTakenByFieldResponse> getAllByField(UUID fieldId);
+    List<GetAllActionTakenByFieldAndSeasonResponse> getAllByFieldAndSeason(UUID fieldId, UUID seasonId);
 }

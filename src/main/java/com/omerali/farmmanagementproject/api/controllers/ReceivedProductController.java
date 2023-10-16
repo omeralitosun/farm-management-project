@@ -7,6 +7,7 @@ import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses.GetAllReceivedProductResponse;
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses.GetReceivedProductResponse;
 import com.omerali.farmmanagementproject.business.dtos.receivedProduct.responses.UpdateReceivedProductResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,12 @@ public class ReceivedProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateReceivedProductResponse add(@RequestBody CreateReceivedProductRequest request) {
+    public CreateReceivedProductResponse add(@Valid @RequestBody CreateReceivedProductRequest request) {
         return service.create(request);
     }
 
     @PutMapping("/{id}")
-    public UpdateReceivedProductResponse update(@PathVariable UUID id, @RequestBody UpdateReceivedProductRequest request) {
+    public UpdateReceivedProductResponse update(@PathVariable UUID id, @Valid @RequestBody UpdateReceivedProductRequest request) {
         return service.update(id, request);
     }
 
