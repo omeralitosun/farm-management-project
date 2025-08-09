@@ -11,6 +11,7 @@ import com.omerali.farmmanagementproject.entities.Equipment;
 import com.omerali.farmmanagementproject.repository.EquipmentRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,28 +53,23 @@ public class EquipmentManager implements EquipmentService {
     @Override
     public GetEquipmentResponse getById(UUID id) {
         Equipment equipment = repository.findById(id).orElseThrow();
-        GetEquipmentResponse response = mapper.map(equipment,GetEquipmentResponse.class);
-        if (equipment.getEquipmentType() != null) {
-            response.setEquipmentType(equipment.getEquipmentType().tr);
-        }
-        return response;
+
+        return mapper.map(equipment,GetEquipmentResponse.class);
     }
 
     @Override
-    public List<GetAllEquipmentResponse> getAll() {
-        List<Equipment> equipments = repository.findAll();
-        List<GetAllEquipmentResponse> responses = equipments
-                .stream()
-                .map(equipment -> {
-                    GetAllEquipmentResponse r = mapper.map(equipment, GetAllEquipmentResponse.class);
-                    if (equipment.getEquipmentType() != null) {
-                        r.setEquipmentType(equipment.getEquipmentType().tr);
-                    }
-                    return r;
-                })
-                .toList();
+    public List<GetAllEquipmentResponse> getAll(int page, int rows) {
+        List<Equipment> equipments;
 
-        return responses;
+        if (rows == 0) {
+            equipments = repository.findAll();
+        } else {
+            equipments = repository.findAll(PageRequest.of(page, rows)).getContent();
+        }
+
+        return equipments.stream()
+                .map(equipment -> mapper.map(equipment, GetAllEquipmentResponse.class))
+                .toList();
     }
 
     @Override

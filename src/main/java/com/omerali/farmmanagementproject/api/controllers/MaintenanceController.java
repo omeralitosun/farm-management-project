@@ -24,8 +24,8 @@ public class MaintenanceController {
     private final MaintenanceService service;
 
     @GetMapping
-    public List<GetAllMaintenanceResponse> getAll() {
-        return service.getAll();
+    public List<GetAllMaintenanceResponse> getAll(@RequestParam int page, @RequestParam int rows) {
+        return service.getAll(page, rows);
     }
 
     @GetMapping("/{id}")
@@ -49,4 +49,10 @@ public class MaintenanceController {
     public void delete(@PathVariable UUID id) {
         service.delete(id);
     }
+
+    @GetMapping("/equipment/{equipmentId}")
+    public List<GetAllMaintenanceResponse> getAllByEquipmentId(@PathVariable UUID equipmentId, @RequestParam int page, @RequestParam int rows) {
+        return service.getAllByEquipmentId(equipmentId, page, rows);
+    }
+
 }

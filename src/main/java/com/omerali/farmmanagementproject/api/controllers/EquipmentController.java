@@ -8,6 +8,7 @@ import com.omerali.farmmanagementproject.business.dtos.equipment.responses.GetAl
 import com.omerali.farmmanagementproject.business.dtos.equipment.responses.GetEquipmentResponse;
 import com.omerali.farmmanagementproject.business.dtos.equipment.responses.UpdateEquipmentResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,8 @@ public class EquipmentController {
     private final EquipmentService service;
 
     @GetMapping
-    public List<GetAllEquipmentResponse> getAll() {
-        return service.getAll();
+    public List<GetAllEquipmentResponse> getAll(@RequestParam int page, @RequestParam int rows) {
+        return service.getAll(page, rows);
     }
 
     @GetMapping("/{id}")
@@ -46,7 +47,7 @@ public class EquipmentController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+    public void delete(@PathVariable @NotNull UUID id) {
         service.delete(id);
     }
 }

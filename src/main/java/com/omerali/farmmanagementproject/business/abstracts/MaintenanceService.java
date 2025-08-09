@@ -18,7 +18,9 @@ public interface MaintenanceService {
 
     GetMaintenanceResponse getById(UUID id);
 
-    List<GetAllMaintenanceResponse> getAll();
+    List<GetAllMaintenanceResponse> getAll(int page, int rows);
 
     void delete(UUID id);
+
+    List<GetAllMaintenanceResponse> getAllByEquipmentId(UUID equipmentId, int page, int rows);
 }

@@ -18,7 +18,7 @@ public interface EquipmentService {
 
     GetEquipmentResponse getById(UUID id);
 
-    List<GetAllEquipmentResponse> getAll();
+    List<GetAllEquipmentResponse> getAll(int page, int rows);
 
     void delete(UUID id);
 }

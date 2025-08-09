@@ -25,7 +25,7 @@ public class Maintenance {
     private double cost;
     private String comment;
     private LocalDateTime date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipment_id")
     private Equipment equipment;
 }

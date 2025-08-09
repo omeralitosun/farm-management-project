@@ -23,7 +23,7 @@ public class Equipment {
     private String name;
     @Enumerated(EnumType.STRING)
     private EquipmentType equipmentType;
-    @OneToMany(mappedBy = "equipment")
+    @OneToMany(mappedBy = "equipment", fetch = FetchType.LAZY)
     public List<Maintenance> maintenances;
 
 }
